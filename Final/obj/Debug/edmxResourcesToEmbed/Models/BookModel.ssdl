@@ -1,0 +1,278 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="HENRYModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="AUTHOR">
+    <Key>
+      <PropertyRef Name="AUTHOR_NUM" />
+    </Key>
+    <Property Name="AUTHOR_NUM" Type="int" Nullable="false" />
+    <Property Name="AUTHOR_LAST" Type="varchar" MaxLength="50" />
+    <Property Name="AUTHOR_FIRST" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="BOOK">
+    <Key>
+      <PropertyRef Name="BOOK_CODE" />
+    </Key>
+    <Property Name="BOOK_CODE" Type="char" MaxLength="4" Nullable="false" />
+    <Property Name="TITLE" Type="varchar" MaxLength="50" />
+    <Property Name="PUBLISHER_CODE" Type="char" MaxLength="2" />
+    <Property Name="TYPE" Type="char" MaxLength="3" />
+    <Property Name="PRICE" Type="money" />
+    <Property Name="PAPERBACK" Type="char" MaxLength="1" />
+  </EntityType>
+  <EntityType Name="BRANCH">
+    <Key>
+      <PropertyRef Name="BRANCH_NUM" />
+    </Key>
+    <Property Name="BRANCH_NUM" Type="int" Nullable="false" />
+    <Property Name="BRANCH_NAME" Type="varchar" MaxLength="50" />
+    <Property Name="BRANCH_LOCATION" Type="varchar" MaxLength="50" />
+    <Property Name="NUM_EMPLOYEES" Type="int" />
+  </EntityType>
+  <EntityType Name="INVENTORY">
+    <Key>
+      <PropertyRef Name="BOOK_CODE" />
+      <PropertyRef Name="BRANCH_NUM" />
+    </Key>
+    <Property Name="BOOK_CODE" Type="char" MaxLength="4" Nullable="false" />
+    <Property Name="BRANCH_NUM" Type="int" Nullable="false" />
+    <Property Name="ON_HAND" Type="int" />
+  </EntityType>
+  <EntityType Name="PUBLISHER">
+    <Key>
+      <PropertyRef Name="PUBLISHER_CODE" />
+    </Key>
+    <Property Name="PUBLISHER_CODE" Type="char" MaxLength="2" Nullable="false" />
+    <Property Name="PUBLISHER_NAME" Type="varchar" MaxLength="50" />
+    <Property Name="CITY" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <EntityType Name="WROTE">
+    <Key>
+      <PropertyRef Name="BOOK_CODE" />
+      <PropertyRef Name="AUTHOR_NUM" />
+    </Key>
+    <Property Name="BOOK_CODE" Type="char" MaxLength="4" Nullable="false" />
+    <Property Name="AUTHOR_NUM" Type="int" Nullable="false" />
+    <Property Name="SEQUENCE" Type="int" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'HENRY.dbo.inventory_branch' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="inventory_branch">
+    <Key>
+      <PropertyRef Name="book_code" />
+      <PropertyRef Name="branch_num" />
+    </Key>
+    <Property Name="book_code" Type="char" MaxLength="4" Nullable="false" />
+    <Property Name="title" Type="varchar" MaxLength="50" />
+    <Property Name="on_hand" Type="int" />
+    <Property Name="branch_num" Type="int" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'HENRY.dbo.noStock2' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="noStock2">
+    <Key>
+      <PropertyRef Name="book_code" />
+    </Key>
+    <Property Name="title" Type="varchar" MaxLength="50" />
+    <Property Name="book_code" Type="char" MaxLength="4" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'HENRY.dbo.vBookDetails' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="vBookDetails">
+    <Key>
+      <PropertyRef Name="BOOK_CODE" />
+      <PropertyRef Name="PUBLISHER_CODE" />
+      <PropertyRef Name="AUTHOR_NUM" />
+    </Key>
+    <Property Name="AUTHOR_LAST" Type="varchar" MaxLength="50" />
+    <Property Name="AUTHOR_FIRST" Type="varchar" MaxLength="50" />
+    <Property Name="TITLE" Type="varchar" MaxLength="50" />
+    <Property Name="TYPE" Type="char" MaxLength="3" />
+    <Property Name="PRICE" Type="money" />
+    <Property Name="PAPERBACK" Type="char" MaxLength="1" />
+    <Property Name="SEQUENCE" Type="int" />
+    <Property Name="PUBLISHER_NAME" Type="varchar" MaxLength="50" />
+    <Property Name="BOOK_CODE" Type="char" MaxLength="4" Nullable="false" />
+    <Property Name="PUBLISHER_CODE" Type="char" MaxLength="2" Nullable="false" />
+    <Property Name="AUTHOR_NUM" Type="int" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'HENRY.dbo.vBookInventory' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="vBookInventory">
+    <Key>
+      <PropertyRef Name="BRANCH_NUM" />
+      <PropertyRef Name="BOOK_CODE" />
+    </Key>
+    <Property Name="ON_HAND" Type="int" />
+    <Property Name="TITLE" Type="varchar" MaxLength="50" />
+    <Property Name="BRANCH_NAME" Type="varchar" MaxLength="50" />
+    <Property Name="BRANCH_NUM" Type="int" Nullable="false" />
+    <Property Name="BOOK_CODE" Type="char" MaxLength="4" Nullable="false" />
+  </EntityType>
+  <Association Name="FK__BOOK__PUBLISHER___164452B1">
+    <End Role="PUBLISHER" Type="Self.PUBLISHER" Multiplicity="0..1" />
+    <End Role="BOOK" Type="Self.BOOK" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PUBLISHER">
+        <PropertyRef Name="PUBLISHER_CODE" />
+      </Principal>
+      <Dependent Role="BOOK">
+        <PropertyRef Name="PUBLISHER_CODE" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__INVENTORY__BOOK___173876EA">
+    <End Role="BOOK" Type="Self.BOOK" Multiplicity="1" />
+    <End Role="INVENTORY" Type="Self.INVENTORY" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="BOOK">
+        <PropertyRef Name="BOOK_CODE" />
+      </Principal>
+      <Dependent Role="INVENTORY">
+        <PropertyRef Name="BOOK_CODE" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__INVENTORY__BRANC__182C9B23">
+    <End Role="BRANCH" Type="Self.BRANCH" Multiplicity="1" />
+    <End Role="INVENTORY" Type="Self.INVENTORY" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="BRANCH">
+        <PropertyRef Name="BRANCH_NUM" />
+      </Principal>
+      <Dependent Role="INVENTORY">
+        <PropertyRef Name="BRANCH_NUM" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__WROTE__AUTHOR_NU__1920BF5C">
+    <End Role="AUTHOR" Type="Self.AUTHOR" Multiplicity="1" />
+    <End Role="WROTE" Type="Self.WROTE" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AUTHOR">
+        <PropertyRef Name="AUTHOR_NUM" />
+      </Principal>
+      <Dependent Role="WROTE">
+        <PropertyRef Name="AUTHOR_NUM" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__WROTE__BOOK_CODE__1A14E395">
+    <End Role="BOOK" Type="Self.BOOK" Multiplicity="1" />
+    <End Role="WROTE" Type="Self.WROTE" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="BOOK">
+        <PropertyRef Name="BOOK_CODE" />
+      </Principal>
+      <Dependent Role="WROTE">
+        <PropertyRef Name="BOOK_CODE" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
+  <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+    <Parameter Name="version" Type="int" Mode="In" />
+    <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+  </Function>
+  <Function Name="sp_creatediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+    <Parameter Name="version" Type="int" Mode="In" />
+    <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+  </Function>
+  <Function Name="sp_dropdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_helpdiagramdefinition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_helpdiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_renamediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+    <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
+  </Function>
+  <EntityContainer Name="HENRYModelStoreContainer">
+    <EntitySet Name="AUTHOR" EntityType="Self.AUTHOR" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="BOOK" EntityType="Self.BOOK" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="BRANCH" EntityType="Self.BRANCH" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="INVENTORY" EntityType="Self.INVENTORY" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PUBLISHER" EntityType="Self.PUBLISHER" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="WROTE" EntityType="Self.WROTE" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="inventory_branch" EntityType="Self.inventory_branch" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [inventory_branch].[book_code] AS [book_code], 
+    [inventory_branch].[title] AS [title], 
+    [inventory_branch].[on_hand] AS [on_hand], 
+    [inventory_branch].[branch_num] AS [branch_num]
+    FROM [dbo].[inventory_branch] AS [inventory_branch]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="noStock2" EntityType="Self.noStock2" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [noStock2].[title] AS [title], 
+    [noStock2].[book_code] AS [book_code]
+    FROM [dbo].[noStock2] AS [noStock2]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="vBookDetails" EntityType="Self.vBookDetails" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [vBookDetails].[AUTHOR_LAST] AS [AUTHOR_LAST], 
+    [vBookDetails].[AUTHOR_FIRST] AS [AUTHOR_FIRST], 
+    [vBookDetails].[TITLE] AS [TITLE], 
+    [vBookDetails].[TYPE] AS [TYPE], 
+    [vBookDetails].[PRICE] AS [PRICE], 
+    [vBookDetails].[PAPERBACK] AS [PAPERBACK], 
+    [vBookDetails].[SEQUENCE] AS [SEQUENCE], 
+    [vBookDetails].[PUBLISHER_NAME] AS [PUBLISHER_NAME], 
+    [vBookDetails].[BOOK_CODE] AS [BOOK_CODE], 
+    [vBookDetails].[PUBLISHER_CODE] AS [PUBLISHER_CODE], 
+    [vBookDetails].[AUTHOR_NUM] AS [AUTHOR_NUM]
+    FROM [dbo].[vBookDetails] AS [vBookDetails]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="vBookInventory" EntityType="Self.vBookInventory" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [vBookInventory].[ON_HAND] AS [ON_HAND], 
+    [vBookInventory].[TITLE] AS [TITLE], 
+    [vBookInventory].[BRANCH_NAME] AS [BRANCH_NAME], 
+    [vBookInventory].[BRANCH_NUM] AS [BRANCH_NUM], 
+    [vBookInventory].[BOOK_CODE] AS [BOOK_CODE]
+    FROM [dbo].[vBookInventory] AS [vBookInventory]</DefiningQuery>
+    </EntitySet>
+    <AssociationSet Name="FK__BOOK__PUBLISHER___164452B1" Association="Self.FK__BOOK__PUBLISHER___164452B1">
+      <End Role="PUBLISHER" EntitySet="PUBLISHER" />
+      <End Role="BOOK" EntitySet="BOOK" />
+    </AssociationSet>
+    <AssociationSet Name="FK__INVENTORY__BOOK___173876EA" Association="Self.FK__INVENTORY__BOOK___173876EA">
+      <End Role="BOOK" EntitySet="BOOK" />
+      <End Role="INVENTORY" EntitySet="INVENTORY" />
+    </AssociationSet>
+    <AssociationSet Name="FK__INVENTORY__BRANC__182C9B23" Association="Self.FK__INVENTORY__BRANC__182C9B23">
+      <End Role="BRANCH" EntitySet="BRANCH" />
+      <End Role="INVENTORY" EntitySet="INVENTORY" />
+    </AssociationSet>
+    <AssociationSet Name="FK__WROTE__AUTHOR_NU__1920BF5C" Association="Self.FK__WROTE__AUTHOR_NU__1920BF5C">
+      <End Role="AUTHOR" EntitySet="AUTHOR" />
+      <End Role="WROTE" EntitySet="WROTE" />
+    </AssociationSet>
+    <AssociationSet Name="FK__WROTE__BOOK_CODE__1A14E395" Association="Self.FK__WROTE__BOOK_CODE__1A14E395">
+      <End Role="BOOK" EntitySet="BOOK" />
+      <End Role="WROTE" EntitySet="WROTE" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

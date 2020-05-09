@@ -1,0 +1,256 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="HENRYModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="AUTHOR">
+    <Key>
+      <PropertyRef Name="AUTHOR_NUM" />
+    </Key>
+    <Property Name="AUTHOR_NUM" Type="Int32" Nullable="false" />
+    <Property Name="AUTHOR_LAST" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="AUTHOR_FIRST" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="WROTEs" Relationship="Self.FK__WROTE__AUTHOR_NU__1920BF5C" FromRole="AUTHOR" ToRole="WROTE" />
+  </EntityType>
+  <EntityType Name="BOOK">
+    <Key>
+      <PropertyRef Name="BOOK_CODE" />
+    </Key>
+    <Property Name="BOOK_CODE" Type="String" MaxLength="4" FixedLength="true" Unicode="false" Nullable="false" />
+    <Property Name="TITLE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="PUBLISHER_CODE" Type="String" MaxLength="2" FixedLength="true" Unicode="false" />
+    <Property Name="TYPE" Type="String" MaxLength="3" FixedLength="true" Unicode="false" />
+    <Property Name="PRICE" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="PAPERBACK" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+    <NavigationProperty Name="PUBLISHER" Relationship="Self.FK__BOOK__PUBLISHER___164452B1" FromRole="BOOK" ToRole="PUBLISHER" />
+    <NavigationProperty Name="INVENTORies" Relationship="Self.FK__INVENTORY__BOOK___173876EA" FromRole="BOOK" ToRole="INVENTORY" />
+    <NavigationProperty Name="WROTEs" Relationship="Self.FK__WROTE__BOOK_CODE__1A14E395" FromRole="BOOK" ToRole="WROTE" />
+  </EntityType>
+  <EntityType Name="BRANCH">
+    <Key>
+      <PropertyRef Name="BRANCH_NUM" />
+    </Key>
+    <Property Name="BRANCH_NUM" Type="Int32" Nullable="false" />
+    <Property Name="BRANCH_NAME" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="BRANCH_LOCATION" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="NUM_EMPLOYEES" Type="Int32" />
+    <NavigationProperty Name="INVENTORies" Relationship="Self.FK__INVENTORY__BRANC__182C9B23" FromRole="BRANCH" ToRole="INVENTORY" />
+  </EntityType>
+  <EntityType Name="INVENTORY">
+    <Key>
+      <PropertyRef Name="BOOK_CODE" />
+      <PropertyRef Name="BRANCH_NUM" />
+    </Key>
+    <Property Name="BOOK_CODE" Type="String" MaxLength="4" FixedLength="true" Unicode="false" Nullable="false" />
+    <Property Name="BRANCH_NUM" Type="Int32" Nullable="false" />
+    <Property Name="ON_HAND" Type="Int32" />
+    <NavigationProperty Name="BOOK" Relationship="Self.FK__INVENTORY__BOOK___173876EA" FromRole="INVENTORY" ToRole="BOOK" />
+    <NavigationProperty Name="BRANCH" Relationship="Self.FK__INVENTORY__BRANC__182C9B23" FromRole="INVENTORY" ToRole="BRANCH" />
+  </EntityType>
+  <EntityType Name="PUBLISHER">
+    <Key>
+      <PropertyRef Name="PUBLISHER_CODE" />
+    </Key>
+    <Property Name="PUBLISHER_CODE" Type="String" MaxLength="2" FixedLength="true" Unicode="false" Nullable="false" />
+    <Property Name="PUBLISHER_NAME" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="CITY" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="BOOKs" Relationship="Self.FK__BOOK__PUBLISHER___164452B1" FromRole="PUBLISHER" ToRole="BOOK" />
+  </EntityType>
+  <EntityType Name="sysdiagram">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="WROTE">
+    <Key>
+      <PropertyRef Name="BOOK_CODE" />
+      <PropertyRef Name="AUTHOR_NUM" />
+    </Key>
+    <Property Name="BOOK_CODE" Type="String" MaxLength="4" FixedLength="true" Unicode="false" Nullable="false" />
+    <Property Name="AUTHOR_NUM" Type="Int32" Nullable="false" />
+    <Property Name="SEQUENCE" Type="Int32" />
+    <NavigationProperty Name="AUTHOR" Relationship="Self.FK__WROTE__AUTHOR_NU__1920BF5C" FromRole="WROTE" ToRole="AUTHOR" />
+    <NavigationProperty Name="BOOK" Relationship="Self.FK__WROTE__BOOK_CODE__1A14E395" FromRole="WROTE" ToRole="BOOK" />
+  </EntityType>
+  <EntityType Name="inventory_branch">
+    <Key>
+      <PropertyRef Name="book_code" />
+      <PropertyRef Name="branch_num" />
+    </Key>
+    <Property Name="book_code" Type="String" MaxLength="4" FixedLength="true" Unicode="false" Nullable="false" />
+    <Property Name="title" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="on_hand" Type="Int32" />
+    <Property Name="branch_num" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="noStock2">
+    <Key>
+      <PropertyRef Name="book_code" />
+    </Key>
+    <Property Name="title" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="book_code" Type="String" MaxLength="4" FixedLength="true" Unicode="false" Nullable="false" />
+  </EntityType>
+  <EntityType Name="vBookDetail">
+    <Key>
+      <PropertyRef Name="BOOK_CODE" />
+      <PropertyRef Name="PUBLISHER_CODE" />
+      <PropertyRef Name="AUTHOR_NUM" />
+    </Key>
+    <Property Name="AUTHOR_LAST" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="AUTHOR_FIRST" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="TITLE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="TYPE" Type="String" MaxLength="3" FixedLength="true" Unicode="false" />
+    <Property Name="PRICE" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="PAPERBACK" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+    <Property Name="SEQUENCE" Type="Int32" />
+    <Property Name="PUBLISHER_NAME" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="BOOK_CODE" Type="String" MaxLength="4" FixedLength="true" Unicode="false" Nullable="false" />
+    <Property Name="PUBLISHER_CODE" Type="String" MaxLength="2" FixedLength="true" Unicode="false" Nullable="false" />
+    <Property Name="AUTHOR_NUM" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="vBookInventory">
+    <Key>
+      <PropertyRef Name="BRANCH_NUM" />
+      <PropertyRef Name="BOOK_CODE" />
+    </Key>
+    <Property Name="ON_HAND" Type="Int32" />
+    <Property Name="TITLE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="BRANCH_NAME" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="BRANCH_NUM" Type="Int32" Nullable="false" />
+    <Property Name="BOOK_CODE" Type="String" MaxLength="4" FixedLength="true" Unicode="false" Nullable="false" />
+  </EntityType>
+  <Association Name="FK__WROTE__AUTHOR_NU__1920BF5C">
+    <End Role="AUTHOR" Type="Self.AUTHOR" Multiplicity="1" />
+    <End Role="WROTE" Type="Self.WROTE" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AUTHOR">
+        <PropertyRef Name="AUTHOR_NUM" />
+      </Principal>
+      <Dependent Role="WROTE">
+        <PropertyRef Name="AUTHOR_NUM" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__BOOK__PUBLISHER___164452B1">
+    <End Role="PUBLISHER" Type="Self.PUBLISHER" Multiplicity="0..1" />
+    <End Role="BOOK" Type="Self.BOOK" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PUBLISHER">
+        <PropertyRef Name="PUBLISHER_CODE" />
+      </Principal>
+      <Dependent Role="BOOK">
+        <PropertyRef Name="PUBLISHER_CODE" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__INVENTORY__BOOK___173876EA">
+    <End Role="BOOK" Type="Self.BOOK" Multiplicity="1" />
+    <End Role="INVENTORY" Type="Self.INVENTORY" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="BOOK">
+        <PropertyRef Name="BOOK_CODE" />
+      </Principal>
+      <Dependent Role="INVENTORY">
+        <PropertyRef Name="BOOK_CODE" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__WROTE__BOOK_CODE__1A14E395">
+    <End Role="BOOK" Type="Self.BOOK" Multiplicity="1" />
+    <End Role="WROTE" Type="Self.WROTE" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="BOOK">
+        <PropertyRef Name="BOOK_CODE" />
+      </Principal>
+      <Dependent Role="WROTE">
+        <PropertyRef Name="BOOK_CODE" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__INVENTORY__BRANC__182C9B23">
+    <End Role="BRANCH" Type="Self.BRANCH" Multiplicity="1" />
+    <End Role="INVENTORY" Type="Self.INVENTORY" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="BRANCH">
+        <PropertyRef Name="BRANCH_NUM" />
+      </Principal>
+      <Dependent Role="INVENTORY">
+        <PropertyRef Name="BRANCH_NUM" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="HENRYEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="AUTHORs" EntityType="Self.AUTHOR" />
+    <EntitySet Name="BOOKs" EntityType="Self.BOOK" />
+    <EntitySet Name="BRANCHes" EntityType="Self.BRANCH" />
+    <EntitySet Name="INVENTORies" EntityType="Self.INVENTORY" />
+    <EntitySet Name="PUBLISHERs" EntityType="Self.PUBLISHER" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+    <EntitySet Name="WROTEs" EntityType="Self.WROTE" />
+    <EntitySet Name="inventory_branch" EntityType="Self.inventory_branch" />
+    <EntitySet Name="noStock2" EntityType="Self.noStock2" />
+    <EntitySet Name="vBookDetails" EntityType="Self.vBookDetail" />
+    <EntitySet Name="vBookInventories" EntityType="Self.vBookInventory" />
+    <AssociationSet Name="FK__WROTE__AUTHOR_NU__1920BF5C" Association="Self.FK__WROTE__AUTHOR_NU__1920BF5C">
+      <End Role="AUTHOR" EntitySet="AUTHORs" />
+      <End Role="WROTE" EntitySet="WROTEs" />
+    </AssociationSet>
+    <AssociationSet Name="FK__BOOK__PUBLISHER___164452B1" Association="Self.FK__BOOK__PUBLISHER___164452B1">
+      <End Role="PUBLISHER" EntitySet="PUBLISHERs" />
+      <End Role="BOOK" EntitySet="BOOKs" />
+    </AssociationSet>
+    <AssociationSet Name="FK__INVENTORY__BOOK___173876EA" Association="Self.FK__INVENTORY__BOOK___173876EA">
+      <End Role="BOOK" EntitySet="BOOKs" />
+      <End Role="INVENTORY" EntitySet="INVENTORies" />
+    </AssociationSet>
+    <AssociationSet Name="FK__WROTE__BOOK_CODE__1A14E395" Association="Self.FK__WROTE__BOOK_CODE__1A14E395">
+      <End Role="BOOK" EntitySet="BOOKs" />
+      <End Role="WROTE" EntitySet="WROTEs" />
+    </AssociationSet>
+    <AssociationSet Name="FK__INVENTORY__BRANC__182C9B23" Association="Self.FK__INVENTORY__BRANC__182C9B23">
+      <End Role="BRANCH" EntitySet="BRANCHes" />
+      <End Role="INVENTORY" EntitySet="INVENTORies" />
+    </AssociationSet>
+    <FunctionImport Name="sp_alterdiagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="version" Mode="In" Type="Int32" />
+      <Parameter Name="definition" Mode="In" Type="Binary" />
+    </FunctionImport>
+    <FunctionImport Name="sp_creatediagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="version" Mode="In" Type="Int32" />
+      <Parameter Name="definition" Mode="In" Type="Binary" />
+    </FunctionImport>
+    <FunctionImport Name="sp_dropdiagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_helpdiagramdefinition" ReturnType="Collection(HENRYModel.sp_helpdiagramdefinition_Result)">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_helpdiagrams" ReturnType="Collection(HENRYModel.sp_helpdiagrams_Result)">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_renamediagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="new_diagramname" Mode="In" Type="String" />
+    </FunctionImport>
+  </EntityContainer>
+  <ComplexType Name="sp_helpdiagramdefinition_Result">
+    <Property Type="Int32" Name="version" Nullable="true" />
+    <Property Type="Binary" Name="definition" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="sp_helpdiagrams_Result">
+    <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
+    <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
+    <Property Type="Int32" Name="ID" Nullable="false" />
+    <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
+    <Property Type="Int32" Name="OwnerID" Nullable="false" />
+  </ComplexType>
+</Schema>

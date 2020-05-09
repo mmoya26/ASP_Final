@@ -1,0 +1,45 @@
+﻿@model Final.Models.SelectedAuthor
+@using (Html.BeginForm("ByAuthorDisplay", "Home", FormMethod.Post))
+{
+    var authorList = new List<SelectListItem>();
+    var formattedName = "";
+    var i = 0;
+    bool firstTime = true;
+
+    foreach (var firstname in ViewBag.firstNames)
+    {
+        formattedName = "";
+        formattedName += firstname;
+
+        if (firstTime)
+        {
+            var authorItem = new SelectListItem()
+            {
+                Text = "Select an Author",
+                Value = ""
+            };
+
+            authorList.Add(authorItem);
+
+            firstTime = false;
+        }
+
+        if (!firstTime)
+        {
+            for (int j = 0; j < 1; j++)
+            {
+                formattedName += " " + ViewBag.lastNames[i];
+
+                var authorItem = new SelectListItem()
+                {
+                    Text = formattedName,
+                    Value = ViewBag.authorNum[i]
+                };
+
+                authorList.Add(authorItem);
+                i++;
+            }
+        }
+    }
+    @Html.DropDownListFor(selected => selected.authorNum, new SelectList(authorList, "Value", "Text"), new { onChange = "this.form.submit();" })
+}

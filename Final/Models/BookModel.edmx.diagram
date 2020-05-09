@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="d2cec1a77205481584e8060c2f3abf44" Name="Diagram1">
+        <EntityTypeShape EntityType="HENRYModel.AUTHOR" Width="1.5" PointX="3" PointY="7.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="HENRYModel.BOOK" Width="1.5" PointX="3" PointY="3.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="HENRYModel.BRANCH" Width="1.5" PointX="3" PointY="10.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="HENRYModel.INVENTORY" Width="1.5" PointX="5.25" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="HENRYModel.PUBLISHER" Width="1.5" PointX="0.75" PointY="3.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="HENRYModel.sysdiagram" Width="1.5" PointX="5.75" PointY="7.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="HENRYModel.WROTE" Width="1.5" PointX="5.25" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="HENRYModel.inventory_branch" Width="1.5" PointX="7.75" PointY="2.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="HENRYModel.noStock2" Width="1.5" PointX="7.75" PointY="5.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="HENRYModel.vBookDetail" Width="1.5" PointX="7.75" PointY="8.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="HENRYModel.vBookInventory" Width="1.5" PointX="9.75" PointY="2.125" IsExpanded="true" />
+        <AssociationConnector Association="HENRYModel.FK__WROTE__AUTHOR_NU__1920BF5C" ManuallyRouted="false" />
+        <AssociationConnector Association="HENRYModel.FK__BOOK__PUBLISHER___164452B1" ManuallyRouted="false" />
+        <AssociationConnector Association="HENRYModel.FK__INVENTORY__BOOK___173876EA" ManuallyRouted="false" />
+        <AssociationConnector Association="HENRYModel.FK__WROTE__BOOK_CODE__1A14E395" ManuallyRouted="false" />
+        <AssociationConnector Association="HENRYModel.FK__INVENTORY__BRANC__182C9B23" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

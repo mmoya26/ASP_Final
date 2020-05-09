@@ -1,0 +1,14 @@
+﻿<div class="two-column">
+    <div class="navigation">
+        @Html.Partial("_Navigation")
+    </div>
+
+    <div class="books-cards-container">
+        @foreach (var id in ViewBag.ids)
+        {
+            <div class="book-card">
+                <img src="~/Content/Images/@id/thumb.jpg"/>
+            </div>
+        }
+    </div>
+</div>

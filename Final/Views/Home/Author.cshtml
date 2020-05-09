@@ -1,0 +1,13 @@
+﻿@using System.Data.SqlClient
+@using Final.Models
+@model Final.Models.SelectedAuthor
+<div class="two-column-no-justify">
+    <div class="navigation">
+        @Html.Partial("_Navigation")
+    </div>
+    
+    <div class="author-container">
+        <h2>Browse by Author</h2>
+        @Html.Partial("_AuthorList")
+    </div>
+</div>
