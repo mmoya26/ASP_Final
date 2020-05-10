@@ -14,7 +14,7 @@ namespace Final.Controllers
         public ActionResult Publisher()
         {
             // #4 LINQ Statement
-            var data = from p in db.PUBLISHERs select new { p.PUBLISHER_CODE, p.PUBLISHER_NAME};
+            var data = from p in db.PUBLISHERs select new {p.PUBLISHER_CODE, p.PUBLISHER_NAME};
             int size = 0;
             int counter = 0;
 
@@ -74,7 +74,7 @@ namespace Final.Controllers
             }
 
             // #4 LINQ Statement
-            var data = from p in db.PUBLISHERs select new { p.PUBLISHER_CODE, p.PUBLISHER_NAME };
+            var data = from p in db.PUBLISHERs select new {p.PUBLISHER_CODE, p.PUBLISHER_NAME};
             int size = 0;
             int counter = 0;
 
