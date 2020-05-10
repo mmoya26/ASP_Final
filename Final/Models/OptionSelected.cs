@@ -5,8 +5,8 @@ using System.Web;
 
 namespace Final.Models
 {
-    public class SelectedAuthor
+    public class OptionSelected
     {
-        public string authorNum { get; set; }
+        public string optionSelected { get; set; }
     }
 }

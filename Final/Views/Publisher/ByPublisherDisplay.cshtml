@@ -1,0 +1,47 @@
+﻿@using System.Data.SqlClient
+@using Final.Models
+@model Final.Models.OptionSelected
+<div class="two-column">
+    <div class="navigation">
+        @Html.Partial("_Navigation")
+    </div>
+
+
+    <div class="book-details">
+        <h2>Browse by Publisher</h2>
+        @Html.Partial("_PublisherList")
+        <div class="book">
+            <div class="book-detail-item"><strong>Book Code</strong></div>
+            <div class="book-detail-item"><strong>Title</strong></div>
+            <div class="book-detail-item"><strong>Type</strong></div>
+            <div class="book-detail-item"><strong>Price</strong></div>
+            <div class="book-detail-item"><strong>Paperback?</strong></div>
+        </div>
+        @{
+            foreach (BOOK book in ViewBag.booksToDisplay)
+            {
+                if (book.BOOK_CODE == null)
+                {
+
+                }
+                else
+                {
+                    <div class="book">
+                        <div class="book-detail-item">@book.BOOK_CODE</div>
+                        <div class="book-detail-item">@book.TITLE</div>
+                        <div class="book-detail-item">@book.TYPE</div>
+                        <div class="book-detail-item">$@book.PRICE</div>
+                        @if (book.PAPERBACK == "0")
+                        {
+                            <div class="book-detail-item">False</div>
+                        }
+                        else
+                        {
+                            <div class="book-detail-item">True</div>
+                        }
+                    </div>
+                }          
+            }
+        }
+    </div>
+</div>

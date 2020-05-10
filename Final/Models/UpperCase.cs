@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Globalization;
 
-namespace Assignment1.Helpers
+namespace Final.Models
 {
     public static class UpperCase
     {

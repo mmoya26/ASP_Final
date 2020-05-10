@@ -1,4 +1,4 @@
-﻿@model Final.Models.SelectedAuthor
+﻿@model Final.Models.OptionSelected
 @using (Html.BeginForm("ByAuthorDisplay", "Home", FormMethod.Post))
 {
     var authorList = new List<SelectListItem>();
@@ -41,5 +41,5 @@
             }
         }
     }
-    @Html.DropDownListFor(selected => selected.authorNum, new SelectList(authorList, "Value", "Text"), new { onChange = "this.form.submit();" })
+    @Html.DropDownListFor(selected => selected.optionSelected, new SelectList(authorList, "Value", "Text"), new { onChange = "this.form.submit();" })
 }

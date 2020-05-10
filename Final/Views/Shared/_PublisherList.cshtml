@@ -1,0 +1,42 @@
+﻿@model Final.Models.OptionSelected
+@using (Html.BeginForm("ByPublisherDisplay", "Publisher", FormMethod.Post))
+{
+    var publisherList = new List<SelectListItem>();
+    var formattedName = "";
+    var i = 0;
+    bool firstTime = true;
+
+    foreach (var publisherName in ViewBag.publisherNames)
+    {
+        formattedName = "";
+        formattedName = publisherName;
+
+        if (firstTime)
+        {
+            var publisherItem = new SelectListItem()
+            {
+                Text = "Select a Publisher",
+                Value = ""
+            };
+
+            publisherList.Add(publisherItem);
+
+            firstTime = false;
+        }
+        else
+        {
+            for (int j = 0; j < 1; j++)
+            {
+                var publisherItem = new SelectListItem()
+                {
+                    Text = formattedName,
+                    Value = ViewBag.publisherCodes[i]
+                };
+
+                publisherList.Add(publisherItem);
+                i++;
+            }
+        }
+    }
+    @Html.DropDownListFor(selected => selected.optionSelected, new SelectList(publisherList, "Value", "Text"), new { onChange = "this.form.submit();" })
+}

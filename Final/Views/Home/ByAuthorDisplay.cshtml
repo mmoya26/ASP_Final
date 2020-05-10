@@ -1,7 +1,6 @@
 ﻿@using System.Data.SqlClient
 @using Final.Models
-@using Assignment1.Helpers
-@model Final.Models.SelectedAuthor
+@model Final.Models.OptionSelected
 <div class="two-column">
     <div class="navigation">
         @Html.Partial("_Navigation")
@@ -9,7 +8,7 @@
 
 
     <div class="book-details">
-        <h2>Browse by Actor</h2>
+        <h2>Browse by Author</h2>
         @Html.Partial("_AuthorList")
         <div class="book">
             <div class="book-detail-item"><strong>Book Code</strong></div>

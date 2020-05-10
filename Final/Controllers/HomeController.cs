@@ -39,7 +39,7 @@ namespace Final.Controllers
             return View();
         }
         [HttpPost]
-        public ActionResult ByAuthorDisplay(SelectedAuthor model)
+        public ActionResult ByAuthorDisplay(OptionSelected model)
         {
             // Data for drop-down list
             var data = from author in db.AUTHORs select new { author.AUTHOR_FIRST, author.AUTHOR_LAST, author.AUTHOR_NUM};
@@ -48,9 +48,9 @@ namespace Final.Controllers
 
             int authorNumberSelected = 0;
 
-            if (model.authorNum != null)
+            if (model.optionSelected != null)
             {
-                authorNumberSelected = Int32.Parse(model.authorNum);
+                authorNumberSelected = Int32.Parse(model.optionSelected);
             }
             else
             {

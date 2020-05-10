@@ -200,6 +200,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\PublisherController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -242,7 +243,7 @@
     <Compile Include="Models\PUBLISHER.cs">
       <DependentUpon>BookModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\SelectedAuthor.cs" />
+    <Compile Include="Models\OptionSelected.cs" />
     <Compile Include="Models\sp_helpdiagramdefinition_Result.cs">
       <DependentUpon>BookModel.tt</DependentUpon>
     </Compile>
@@ -423,7 +424,6 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Inventory.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Account\_ExternalLoginsListPartial.cshtml" />
@@ -450,6 +450,9 @@
     <Content Include="Views\Home\Author.cshtml" />
     <Content Include="Views\Home\ByAuthorDisplay.cshtml" />
     <Content Include="Views\Shared\_AuthorList.cshtml" />
+    <Content Include="Views\Publisher\Publisher.cshtml" />
+    <Content Include="Views\Shared\_PublisherList.cshtml" />
+    <Content Include="Views\Publisher\ByPublisherDisplay.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
