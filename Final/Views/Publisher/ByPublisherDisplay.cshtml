@@ -7,15 +7,15 @@
     </div>
 
 
-    <div class="book-details">
+    <div class="block-details">
         <h2>Browse by Publisher</h2>
         @Html.Partial("_PublisherList")
-        <div class="book">
-            <div class="book-detail-item"><strong>Book Code</strong></div>
-            <div class="book-detail-item"><strong>Title</strong></div>
-            <div class="book-detail-item"><strong>Type</strong></div>
-            <div class="book-detail-item"><strong>Price</strong></div>
-            <div class="book-detail-item"><strong>Paperback?</strong></div>
+        <div class="block">
+            <div class="block-detail-item"><strong>Book Code</strong></div>
+            <div class="block-detail-item"><strong>Title</strong></div>
+            <div class="block-detail-item"><strong>Type</strong></div>
+            <div class="block-detail-item"><strong>Price</strong></div>
+            <div class="block-detail-item"><strong>Paperback?</strong></div>
         </div>
         @{
             foreach (BOOK book in ViewBag.booksToDisplay)
@@ -26,18 +26,18 @@
                 }
                 else
                 {
-                    <div class="book">
-                        <div class="book-detail-item">@book.BOOK_CODE</div>
-                        <div class="book-detail-item">@book.TITLE</div>
-                        <div class="book-detail-item">@book.TYPE</div>
-                        <div class="book-detail-item">$@book.PRICE</div>
+                    <div class="block">
+                        <div class="block-detail-item">@book.BOOK_CODE</div>
+                        <div class="block-detail-item">@book.TITLE</div>
+                        <div class="block-detail-item">@book.TYPE</div>
+                        <div class="block-detail-item">$@book.PRICE</div>
                         @if (book.PAPERBACK == "0")
                         {
-                            <div class="book-detail-item">False</div>
+                            <div class="block-detail-item">False</div>
                         }
                         else
                         {
-                            <div class="book-detail-item">True</div>
+                            <div class="block-detail-item">True</div>
                         }
                     </div>
                 }          

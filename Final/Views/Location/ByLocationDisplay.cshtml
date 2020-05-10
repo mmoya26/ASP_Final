@@ -1,0 +1,54 @@
+﻿@using System.Data.SqlClient
+@using Final.Models
+@model Final.Models.OptionSelected
+<div class="two-column-no-justify">
+    <div class="navigation">
+        @Html.Partial("_Navigation")
+    </div>
+    
+    @{
+        BRANCH displayBranch = ViewBag.returnBranch;
+    }
+    <div class="two-blocks column ml-40">
+        <h2>Browse by Location</h2>
+        @Html.Partial("_LocationList")
+        <div class="flex mt-20">
+            <div class="block column">
+                <div class="block-detail-item no-width"><strong>Branch Number</strong></div>
+                <div class="block-detail-item no-width"><strong>Branch Name</strong></div>
+                <div class="block-detail-item no-width"><strong>Branch Location</strong></div>
+                <div class="block-detail-item no-width"><strong>Number of Employees</strong></div>
+            </div>
+            <div class="block column">
+                <div class="block-detail-item no-width">@displayBranch.BRANCH_NUM.ToString()</div>
+                <div class="block-detail-item no-width">@displayBranch.BRANCH_NAME</div>
+                <div class="block-detail-item no-width">@displayBranch.BRANCH_LOCATION</div>
+                <div class="block-detail-item no-width">@displayBranch.NUM_EMPLOYEES</div>
+            </div>
+        </div>
+        
+        <div class="two-blocks mt-20 column">
+            <div class="flex">
+                <div class="block">
+                    <div class="block-detail-item no-width"><strong>Title</strong></div>
+                </div>
+                <div class="block">
+                    <div class="block-detail-item no-width"><strong>Quantity On Hand</strong></div>
+                </div>
+            </div>
+            
+            @for (int i = 0; i < ViewBag.bookTitles.Length; i++)
+            {
+                <div class="flex">
+                    <div class="block">
+                        <div class="block-detail-item no-width">@ViewBag.bookTitles[i]</div>
+                    </div>
+                    <div class="block">
+                        <div class="block-detail-item no-width">@ViewBag.bookQuantities[i]</div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+    
+</div>

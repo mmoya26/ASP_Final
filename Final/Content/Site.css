@@ -146,11 +146,11 @@ ul {
     color: white;
 }
 
-.book {
+.block {
     display: flex;
 }
 
-.book-detail-item {
+.block-detail-item {
     background-color: #fff;
     padding: 10px;
     width: 100px;
@@ -158,7 +158,7 @@ ul {
     border: 1px solid #d0d0d0;
 }
 
-.book-details {
+.block-details {
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -173,6 +173,30 @@ ul {
     margin: 0 auto;
 }
 
-.book-details form {
+.block-details form {
     margin-bottom: 30px;
+}
+
+.column {
+    flex-direction: column;
+}
+
+.two-blocks {
+    display: flex;
+}
+
+.no-width {
+    width: auto;
+}
+
+.flex {
+    display: flex;
+}
+
+.mt-20 {
+    margin-top: 20px;
+}
+
+.ml-40 {
+    margin-left: 40px;
 }

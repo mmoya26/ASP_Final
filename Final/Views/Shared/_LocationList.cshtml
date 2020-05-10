@@ -1,0 +1,34 @@
+﻿@model Final.Models.OptionSelected
+@using (Html.BeginForm("ByLocationDisplay", "Location", FormMethod.Post))
+{
+    var locationList = new List<SelectListItem>();
+    var formattedName = "";
+    var i = 0;
+
+    var locatioItem = new SelectListItem()
+    {
+        Text = "Select a Location",
+        Value = ""
+    };
+
+    locationList.Add(locatioItem);
+
+    foreach (var branchName in ViewBag.branchNames)
+    {
+        formattedName = "";
+        formattedName = branchName;
+
+        for (int j = 0; j < 1; j++)
+        {
+            var locationLoopItem = new SelectListItem()
+            {
+                Text = formattedName,
+                Value = ViewBag.branchNumbers[i]
+            };
+
+            locationList.Add(locationLoopItem);
+            i++;
+        }
+    }
+    @Html.DropDownListFor(selected => selected.optionSelected, new SelectList(locationList, "Value", "Text"), new { onChange = "this.form.submit();" })
+}

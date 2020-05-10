@@ -41,7 +41,6 @@ namespace Final.Controllers
         [HttpPost]
         public ActionResult ByPublisherDisplay(OptionSelected model)
         {
-
             string optionSelected;
 
             if (model.optionSelected != null)
@@ -73,7 +72,7 @@ namespace Final.Controllers
                 booksToDisplay.Add(myBook);
             }
 
-            // #4 LINQ Statement
+            // #5 LINQ Statement
             var data = from p in db.PUBLISHERs select new {p.PUBLISHER_CODE, p.PUBLISHER_NAME};
             int size = 0;
             int counter = 0;

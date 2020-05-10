@@ -199,6 +199,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\LocationController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\PublisherController.cs" />
     <Compile Include="Global.asax.cs">
@@ -233,6 +234,7 @@
     <Compile Include="Models\INVENTORY.cs">
       <DependentUpon>BookModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\InventoryBookDisplay.cs" />
     <Compile Include="Models\inventory_branch.cs">
       <DependentUpon>BookModel.tt</DependentUpon>
     </Compile>
@@ -453,6 +455,10 @@
     <Content Include="Views\Publisher\Publisher.cshtml" />
     <Content Include="Views\Shared\_PublisherList.cshtml" />
     <Content Include="Views\Publisher\ByPublisherDisplay.cshtml" />
+    <Content Include="Views\Location\Location.cshtml" />
+    <Content Include="Views\Location\ByLocationDisplay.cshtml" />
+    <Content Include="Views\Shared\_LocationList.cshtml" />
+    <Content Include="Views\Home\Book.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
