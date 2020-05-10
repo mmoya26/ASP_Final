@@ -1,1 +1,56 @@
-﻿
+﻿@using Final.Models
+@using System.Data.SqlClient
+<div class="two-column">
+    <div class="navigation">
+        @Html.Partial("_Navigation")
+    </div>
+    
+
+    <img src="~/Content/Images/@ViewBag.returnBook.BOOK_CODE/large.jpg"/>
+    
+    <div class="flex column">
+        <div class="flex mt-20">
+            <div class="block column">
+                <div class="block-detail-item no-width"><strong>Title:</strong></div>
+                <div class="block-detail-item no-width"><strong>Type:</strong></div>
+                <div class="block-detail-item no-width"><strong>Price:</strong></div>
+                <div class="block-detail-item no-width"><strong>Paperback?:</strong></div>
+                <div class="block-detail-item no-width"><strong>Publisher:</strong></div>
+                <div class="block-detail-item no-width"><strong>Book Code:</strong></div>
+                <div class="block-detail-item no-width"><strong>Written By:</strong></div>
+            </div>
+            <div class="block column">
+                <div class="block-detail-item no-width">@ViewBag.returnBook.TITLE</div>
+                <div class="block-detail-item no-width">@ViewBag.returnBook.TYPE</div>
+                <div class="block-detail-item no-width">$@ViewBag.returnBook.PRICE</div>
+                @if (@ViewBag.returnBook.PAPERBACK == "0")
+                {
+                    <div class="block-detail-item no-width">False</div>
+                }
+                else
+                {
+                    <div class="block-detail-item no-width">True</div>
+                }
+
+                <div class="block-detail-item no-width">@ViewBag.Publisher</div>
+                <div class="block-detail-item no-width">@ViewBag.returnBook.BOOK_CODE</div>
+                <div class="block-detail-item no-width">@ViewBag.WrittenBy</div>
+            </div>
+        </div>
+        <div class="flex mt-20 column">
+            <div class="block">
+                <div class="block-detail-item no-width"><strong>Location:</strong></div>
+                <div class="block-detail-item no-width"><strong>On Hand Quantity:</strong></div>
+            </div>
+            <div class="block column">
+                @foreach (InventoryBookDisplay displayLocation in ViewBag.returnLocationDisplay)
+                {
+                    <div class="flex">
+                        <div class="block-detail-item no-width"><a href='@Url.Action("InventoryLocation", "Location", new {optionSelected = displayLocation.routeReference})'>@displayLocation.name</a></div>
+                        <div class="block-detail-item no-width">@displayLocation.quantity</div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,13 +1,14 @@
 ﻿<div class="two-column">
     <div class="navigation">
         @Html.Partial("_Navigation")
-    </div>
-
+    </div>   
     <div class="books-cards-container">
-        @foreach (var id in ViewBag.ids)
-        {
+        @foreach (var code in ViewBag.ids)
+        {   
             <div class="book-card">
-                <img src="~/Content/Images/@id/thumb.jpg"/>
+                <a href='@Url.Action("Book", "Home", new {bookCode = code})'>
+                    <img src="~/Content/Images/@code/thumb.jpg"/>
+                </a>
             </div>
         }
     </div>

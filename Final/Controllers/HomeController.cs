@@ -117,5 +117,97 @@ namespace Final.Controllers
             ViewBag.ids = listIDs;
             return View();
         }
+
+        public ActionResult Book(string bookCode)
+        {
+            var optionSelected = bookCode;
+
+            var allBooks = db.BOOKs.ToList();
+            var wrotes = db.WROTEs.ToList();
+            var allAuthors = db.AUTHORs.ToList();
+            var allPublishers = db.PUBLISHERs.ToList();
+            var inventory = db.INVENTORies.ToList();
+            var allBranches = db.BRANCHes.ToList();
+
+            List<InventoryBookDisplay> returnLocationDisplay = new List<InventoryBookDisplay>();
+
+            BOOK returnBook = new BOOK();
+
+            foreach (var book in allBooks)
+            {
+                if (book.BOOK_CODE == optionSelected)
+                {
+                    returnBook.TITLE = book.TITLE;
+                    returnBook.TYPE = book.TYPE;
+                    returnBook.PRICE = book.PRICE;
+                    returnBook.PAPERBACK = book.PAPERBACK;
+                    returnBook.BOOK_CODE = book.BOOK_CODE;
+                    returnBook.PUBLISHER_CODE = book.PUBLISHER_CODE;
+                }
+            }
+
+            foreach (var record in wrotes)
+            {
+                if (record.BOOK_CODE == optionSelected)
+                {
+                    foreach (var author in allAuthors)
+                    {
+                        if (author.AUTHOR_NUM == record.AUTHOR_NUM)
+                        {
+                            ViewBag.WrittenBy = author.AUTHOR_FIRST + " " + author.AUTHOR_LAST;             
+                        }
+                    }
+                }
+            }
+
+            foreach (var publisher in allPublishers)
+            {
+                if (publisher.PUBLISHER_CODE == returnBook.PUBLISHER_CODE)
+                {
+                    ViewBag.Publisher = publisher.PUBLISHER_NAME;
+                }
+            }
+
+            List<string> branchesIDs = new List<string>();
+
+            foreach (var record in inventory)
+            {
+                if (record.BOOK_CODE == optionSelected)
+                {
+                    branchesIDs.Add(record.BRANCH_NUM.ToString());
+                }
+            }
+
+            InventoryBookDisplay temporaBookDisplay = new InventoryBookDisplay();
+
+            foreach (var branch in allBranches)
+            {
+                foreach (var element in branchesIDs)
+                {
+                    if (branch.BRANCH_NUM.ToString() == element)
+                    {
+                        temporaBookDisplay = new InventoryBookDisplay();
+
+                        temporaBookDisplay.name = branch.BRANCH_NAME;
+
+                        foreach (var record in inventory)
+                        {
+                            if (record.BRANCH_NUM.ToString() == element && record.BOOK_CODE == optionSelected)
+                            {
+                                
+                                temporaBookDisplay.quantity = record.ON_HAND.ToString();
+                                temporaBookDisplay.routeReference = record.BRANCH_NUM.ToString();
+                                returnLocationDisplay.Add(temporaBookDisplay);
+                            }
+                        }
+                    }
+                }
+            }
+
+            ViewBag.returnBook = returnBook;
+            ViewBag.returnLocationDisplay = returnLocationDisplay;
+
+            return View();
+        }
     }
 }

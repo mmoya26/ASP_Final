@@ -456,7 +456,7 @@
     <Content Include="Views\Shared\_PublisherList.cshtml" />
     <Content Include="Views\Publisher\ByPublisherDisplay.cshtml" />
     <Content Include="Views\Location\Location.cshtml" />
-    <Content Include="Views\Location\ByLocationDisplay.cshtml" />
+    <Content Include="Views\Location\_ByLocationDisplay.cshtml" />
     <Content Include="Views\Shared\_LocationList.cshtml" />
     <Content Include="Views\Home\Book.cshtml" />
   </ItemGroup>
