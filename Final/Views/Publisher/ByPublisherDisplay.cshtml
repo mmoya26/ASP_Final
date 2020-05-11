@@ -27,7 +27,7 @@
                 else
                 {
                     <div class="block">
-                        <div class="block-detail-item">@book.BOOK_CODE</div>
+                        <div class="block-detail-item"><a href='@Url.Action("Book", "Home", new { bookCode = @book.BOOK_CODE})'>@book.BOOK_CODE</a></div>
                         <div class="block-detail-item">@book.TITLE</div>
                         <div class="block-detail-item">@book.TYPE</div>
                         <div class="block-detail-item">$@book.PRICE</div>

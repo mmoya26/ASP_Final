@@ -32,7 +32,7 @@
                 <div class="block">
                     <div class="block-detail-item no-width"><strong>Title</strong></div>
                 </div>
-                <div class="block">
+                <div class="block">a
                     <div class="block-detail-item no-width"><strong>Quantity On Hand</strong></div>
                 </div>
             </div>
@@ -41,7 +41,7 @@
             {
                 <div class="flex">
                     <div class="block">
-                        <div class="block-detail-item no-width">@ViewBag.bookTitles[i]</div>
+                        <div class="block-detail-item no-width"><a href='@Url.Action("Book", "Home", new { bookCode = @ViewBag.bookCodesReturn[i]})'>@ViewBag.bookTitles[i]</a></div>
                     </div>
                     <div class="block">
                         <div class="block-detail-item no-width">@ViewBag.bookQuantities[i]</div>

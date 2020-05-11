@@ -32,9 +32,9 @@
                     <div class="block-detail-item no-width">True</div>
                 }
 
-                <div class="block-detail-item no-width">@ViewBag.Publisher</div>
+                <div class="block-detail-item no-width"><a href='@Url.Action("ByPublisherDisplay", "Publisher", new { optionSelected = ViewBag.publisherCode})'>@ViewBag.Publisher</a></div>
                 <div class="block-detail-item no-width">@ViewBag.returnBook.BOOK_CODE</div>
-                <div class="block-detail-item no-width">@ViewBag.WrittenBy</div>
+                <div class="block-detail-item no-width"><a href='@Url.Action("ByAuthorDisplay", "Home", new { optionSelected = ViewBag.AuthorID})'>@ViewBag.WrittenBy</a></div>
             </div>
         </div>
         <div class="flex mt-20 column">

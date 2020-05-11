@@ -83,6 +83,22 @@ namespace Final.Controllers
                 booksToDisplay.Add(myBook);
             }
 
+            var allPublishers = db.PUBLISHERs.ToList();
+            string[] referencesNames = new string[booksToDisplay.Count];
+            int counter = 0;
+
+            foreach (var item in booksToDisplay)
+            {
+                foreach (var publisher in allPublishers)
+                {
+                    if (publisher.PUBLISHER_CODE == item.PUBLISHER_CODE)
+                    {
+                        referencesNames[counter] = publisher.PUBLISHER_NAME;
+                        counter++;
+                    }
+                }
+            }
+
             List<string> firstNames = new List<string>();
             string[] lastNames = new string[25];
             string[] authorNum = new string[25];
@@ -100,7 +116,76 @@ namespace Final.Controllers
             ViewBag.lastNames = lastNames;
             ViewBag.authorNum = authorNum;
             ViewBag.booksToDisplay = booksToDisplay;
+            ViewBag.referencesNames = referencesNames;
             return View();
+        }
+
+        public ActionResult ByAuthorDisplay(string optionSelected)
+        {
+            // Data for drop-down list
+            var data = from author in db.AUTHORs select new { author.AUTHOR_FIRST, author.AUTHOR_LAST, author.AUTHOR_NUM };
+
+            var allBooks = db.BOOKs.ToList();
+
+            // #2 LINQ Statement
+            var bookCodes = db.WROTEs.Where(a => a.AUTHOR_NUM.ToString() == optionSelected).Select(id => id.BOOK_CODE);
+            List<BOOK> booksToDisplay = new List<BOOK>();
+
+            foreach (var code in bookCodes)
+            {
+                BOOK myBook = new BOOK();
+
+                foreach (var book in allBooks)
+                {
+                    if (code == book.BOOK_CODE)
+                    {
+                        myBook.BOOK_CODE = book.BOOK_CODE;
+                        myBook.PAPERBACK = book.PAPERBACK;
+                        myBook.PRICE = book.PRICE;
+                        myBook.PUBLISHER_CODE = book.PUBLISHER_CODE;
+                        myBook.TYPE = book.TYPE;
+                        myBook.TITLE = book.TITLE;
+                    }
+                }
+
+                booksToDisplay.Add(myBook);
+            }
+
+            var allPublishers = db.PUBLISHERs.ToList();
+            string[] referencesNames = new string[booksToDisplay.Count];
+            int counter = 0;
+
+            foreach (var item in booksToDisplay)
+            {
+                foreach (var publisher in allPublishers)
+                {
+                    if (publisher.PUBLISHER_CODE == item.PUBLISHER_CODE)
+                    {
+                        referencesNames[counter] = publisher.PUBLISHER_NAME;
+                        counter++;
+                    }
+                }
+            }
+
+            List<string> firstNames = new List<string>();
+            string[] lastNames = new string[25];
+            string[] authorNum = new string[25];
+            int i = 0;
+
+            foreach (var author in data)
+            {
+                firstNames.Add(author.AUTHOR_FIRST);
+                lastNames[i] = author.AUTHOR_LAST;
+                authorNum[i] = author.AUTHOR_NUM.ToString();
+                i++;
+            }
+
+            ViewBag.firstNames = firstNames;
+            ViewBag.lastNames = lastNames;
+            ViewBag.authorNum = authorNum;
+            ViewBag.booksToDisplay = booksToDisplay;
+            ViewBag.referencesNames = referencesNames;
+            return View("ByAuthorDisplay");
         }
 
         public ActionResult Inventory()
@@ -154,7 +239,8 @@ namespace Final.Controllers
                     {
                         if (author.AUTHOR_NUM == record.AUTHOR_NUM)
                         {
-                            ViewBag.WrittenBy = author.AUTHOR_FIRST + " " + author.AUTHOR_LAST;             
+                            ViewBag.WrittenBy = author.AUTHOR_FIRST + " " + author.AUTHOR_LAST;
+                            ViewBag.AuthorID = author.AUTHOR_NUM;
                         }
                     }
                 }
@@ -165,6 +251,7 @@ namespace Final.Controllers
                 if (publisher.PUBLISHER_CODE == returnBook.PUBLISHER_CODE)
                 {
                     ViewBag.Publisher = publisher.PUBLISHER_NAME;
+                    ViewBag.PublisherCode = publisher.PUBLISHER_CODE;
                 }
             }
 
@@ -207,7 +294,42 @@ namespace Final.Controllers
             ViewBag.returnBook = returnBook;
             ViewBag.returnLocationDisplay = returnLocationDisplay;
 
+            return View("Book");
+        }
+
+        public ActionResult Contact()
+        {
+            // #4 LINQ Statement
+            var data = from b in db.BRANCHes select new { b.BRANCH_NAME, b.BRANCH_NUM };
+            int size = 0;
+            int counter = 0;
+
+            foreach (var publisher in data)
+            {
+                size++;
+            }
+
+            string[] branchNames = new string[size];
+            string[] branchNumbers = new string[size];
+
+            foreach (var branch in data)
+            {
+                branchNames[counter] = branch.BRANCH_NAME;
+                branchNumbers[counter] = branch.BRANCH_NUM.ToString();
+                counter++;
+            }
+
+            ViewBag.branchNames = branchNames;
+            ViewBag.branchNumbers = branchNumbers;
+
             return View();
+        }
+
+        [HttpPost]
+        public JsonResult Contact(Register model)
+        {
+            return Json(model);
         }
     }
 }
+

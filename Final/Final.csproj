@@ -246,6 +246,7 @@
       <DependentUpon>BookModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\OptionSelected.cs" />
+    <Compile Include="Models\Register.cs" />
     <Compile Include="Models\sp_helpdiagramdefinition_Result.cs">
       <DependentUpon>BookModel.tt</DependentUpon>
     </Compile>
@@ -343,6 +344,7 @@
     <Content Include="Content\Images\books.jpg" />
     <Content Include="Content\Images\bookstore.jpg" />
     <Content Include="Content\Images\inventory.jpg" />
+    <Content Include="Content\Images\pleasewait.gif" />
     <Content Include="Content\Images\publisher.jpg" />
     <Content Include="Content\Images\wood.jpg" />
     <Content Include="favicon.ico" />
@@ -408,6 +410,8 @@
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
@@ -459,6 +463,7 @@
     <Content Include="Views\Location\_ByLocationDisplay.cshtml" />
     <Content Include="Views\Shared\_LocationList.cshtml" />
     <Content Include="Views\Home\Book.cshtml" />
+    <Content Include="Views\Home\Contact.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

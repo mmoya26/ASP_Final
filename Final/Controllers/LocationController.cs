@@ -94,6 +94,7 @@ namespace Final.Controllers
 
             string[] bookTitles = new string[booksToDisplaySize];
             string[] bookQuantities = new string[booksToDisplaySize];
+            string[] bookCodesReturn = new string[booksToDisplaySize];
 
             foreach (var bookCode in bookCodes)
             {
@@ -102,6 +103,7 @@ namespace Final.Controllers
                     if (book.BOOK_CODE == bookCode)
                     {
                         bookTitles[inventoryCounter] = book.TITLE;
+                        bookCodesReturn[inventoryCounter] = book.BOOK_CODE;
                         inventoryCounter++;
                     }
                 }
@@ -127,7 +129,7 @@ namespace Final.Controllers
             ViewBag.returnBranch = returnBranch;
             ViewBag.bookTitles = bookTitles;
             ViewBag.bookQuantities = bookQuantities;
-
+            ViewBag.bookCodesReturn = bookCodesReturn;
             return View("_ByLocationDisplay");
         }
 
@@ -198,6 +200,7 @@ namespace Final.Controllers
 
             string[] bookTitles = new string[booksToDisplaySize];
             string[] bookQuantities = new string[booksToDisplaySize];
+            string[] bookCodesReturn = new string[booksToDisplaySize];
 
             foreach (var bookCode in bookCodes)
             {
@@ -206,6 +209,7 @@ namespace Final.Controllers
                     if (book.BOOK_CODE == bookCode)
                     {
                         bookTitles[inventoryCounter] = book.TITLE;
+                        bookCodesReturn[inventoryCounter] = book.BOOK_CODE;
                         inventoryCounter++;
                     }
                 }
@@ -231,7 +235,7 @@ namespace Final.Controllers
             ViewBag.returnBranch = returnBranch;
             ViewBag.bookTitles = bookTitles;
             ViewBag.bookQuantities = bookQuantities;
-
+            ViewBag.bookCodesReturn = bookCodesReturn;
             return View();
         }
     }

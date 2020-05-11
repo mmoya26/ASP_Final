@@ -1,0 +1,75 @@
+﻿@using System.Data.SqlClient
+@model Final.Models.Register
+<div class="two-column">
+    <div class="navigation">
+        @Html.Partial("_Navigation")
+    </div>
+
+    <div class="block-details">
+        <div id="loading" style="display:none;">
+            <img src="~/Content/Images/pleasewait.gif"/>
+            <p>Loading, please wait...</p>
+        </div>
+        <div id="userRegister">
+            @using (Ajax.BeginForm("Contact",
+                "Home",
+                new AjaxOptions
+                {
+                    HttpMethod = "Post",
+                    InsertionMode = InsertionMode.Replace,
+                    LoadingElementId = "loading",
+                    LoadingElementDuration = 4000,
+                    OnSuccess = "DisplayMessage"
+                }))
+            {
+                <table>
+                    <tr>
+                        <td>First Name:</td>
+                        <td>@Html.TextBoxFor(o => o.uFirstName)</td>
+                    </tr>
+                    <tr>
+                        <td>Last Name:</td>
+                        <td>@Html.TextBoxFor(s => s.uLastName)</td>
+                    </tr>
+                    <tr>
+                        <td>Email Address:</td>
+                        <td>@Html.TextBoxFor(s => s.uEmail)</td>
+                    </tr>
+                    <tr>
+                        <td>Confirm Email Address:</td>
+                        <td>@Html.TextBoxFor(s => s.uEmail)</td>
+                    </tr>
+                    @* <tr> *@
+                    @*     <td>Branch</td> *@
+                    @*     <td>@Html.Partial("_LocationList")</td> *@
+                    @* </tr> *@
+                    <tr>
+                        <td><input type="reset" value="Reset"/></td>
+                        <td><input type="submit" value="Save"/></td>
+                    </tr>
+                </table>
+            }
+        </div>
+    </div>
+</div>
+@section Scripts{
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <script>
+        function DisplayMessage(userData) {
+            var target = $("#userRegister")
+            target.empty();
+
+            if (userData) {
+                setTimeout(function()
+                {
+                    target.append("<p id=loading>Thank you for waiting, your request has been processed!</p>")
+                }, 7000)
+
+            }
+            else {
+                target.append("Please check your entry. No data received.")
+            }
+        }
+    </script>
+}

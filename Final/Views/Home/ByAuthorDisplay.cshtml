@@ -19,10 +19,11 @@
             <div class="block-detail-item"><strong>Publisher</strong></div>
         </div>
         @{
+            var counter = 0;
             foreach (BOOK book in ViewBag.booksToDisplay)
             {
                 <div class="block">
-                    <div class="block-detail-item">@book.BOOK_CODE</div>
+                    <div class="block-detail-item"><a href='@Url.Action("Book", "Home", new { bookCode = @book.BOOK_CODE})'>@book.BOOK_CODE</a></div>
                     <div class="block-detail-item">@book.TITLE.ToString().ToTitleCase()</div>
                     <div class="block-detail-item">@book.TYPE</div>
                     <div class="block-detail-item">$@book.PRICE</div>
@@ -34,8 +35,10 @@
                     {
                         <div class="block-detail-item">True</div>
                     }
-                    <div class="block-detail-item">@book.PUBLISHER_CODE</div>
+                    <div class="block-detail-item"><a href='@Url.Action("ByPublisherDisplay", "Publisher", new { optionSelected = @book.PUBLISHER_CODE})'>@ViewBag.referencesNames[counter]</a></div>
                 </div>
+
+                counter++;
             }
         }
     </div>
